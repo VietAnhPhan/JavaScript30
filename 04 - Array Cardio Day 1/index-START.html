@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Array Cardio 💪</title>
   <link rel="icon" href="https://fav.farm/🔥" />
 </head>
+
 <body>
   <p><em>Psst: have a look at the JavaScript Console</em> 💁</p>
   <script>
@@ -35,32 +37,104 @@
       'Berne, Eric', 'Berra, Yogi', 'Berry, Wendell', 'Bevan, Aneurin', 'Ben-Gurion, David', 'Bevel, Ken', 'Biden, Joseph', 'Bennington, Chester', 'Bierce, Ambrose',
       'Billings, Josh', 'Birrell, Augustine', 'Blair, Tony', 'Beecher, Henry', 'Biondo, Frank'
     ];
-    
+
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const inventorsFilter = inventors.filter(inventor => 1500 <= inventor.year && inventor.year < 1600
+    );
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    const inventorFirstLast = inventors.map(inventor => `${inventor.first} ${inventor.last}`
+    );
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const oldest = inventors.sort(function (firstOne, nextOne) {
+      if (firstOne.year > nextOne.year) {
+        return -1;
+      }
+      else {
+        return 1
+      }
+    }
+    );
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    const years = inventors.reduce(function (sum, inventor) {
+      return sum + (inventor.passed - inventor.year);
+    }, 0);
+
 
     // 5. Sort the inventors by years lived
+    const yearsLived = inventors.sort(function (firstOne, nextOne) {
+      const firstOneAge = firstOne.passed - firstOne.year;
+      const nextOneAge = nextOne.passed - nextOne.year;
+
+      if (firstOneAge > nextOneAge) {
+        return 1;
+      }
+      else {
+        return -1
+      }
+    }
+    );
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
-
+    // const category = document.querySelector(".mw-category");
+    // const link = Array.from(category.querySelectorAll("a"));
+    // const de = link.
+    //   map(item => item.textContent)
+    //   .filter(item => item.includes('de'));
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const fullNamesObjs = people.map(function (item) {
+      [firstName, LastName] = item.split(', ');
+      return { 'first': firstName, 'last': LastName }
+
+    }).sort(function (firstOne, nextOne) {
+      if (firstOne.last > nextOne.last) {
+        return 1;
+      }
+      else {
+        return -1;
+      }
+    });
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
-    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck'];
+    const sumInstances = data.reduce(function (sum, item) {
+      if (!sum[item]) {
+        sum[item] = 0;
+      }
+      sum[item]++
+      return sum;
+
+      // sum[item];
+    }, {});
+
+    const x = 5;
+    const arr = [1, 2, 4, 5, 7, 9]
+
+    const complements = arr.reduce(function (arrayObj, item) {
+      arrayObj.push(x - item);
+      return arrayObj;
+    }, [])
+
+    let num1, num2;
+    complements.forEach(function (item) {
+      if (arr.includes(item)) {
+        num1 = x - item
+        num2 = item
+        return
+      }
+    })
+    console.log(`${num1}  ${num2}`);
 
   </script>
 </body>
+
 </html>
